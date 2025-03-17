@@ -1,7 +1,7 @@
 "use client";
 
-import { Box, Typography } from "@mui/material";
-import { SingleProduct } from "../SingleProduct/SingleProduct";
+import { Box } from "@mui/material";
+import { Product } from "./Product";
 import { useCartStore } from "@/store/CartProvider";
 
 type ProductsProps = {
@@ -10,7 +10,6 @@ type ProductsProps = {
 
 export function Products({ products }: ProductsProps) {
   const cart = useCartStore((st) => st.cart);
-  console.log(products);
   return (
     <Box
       sx={{
@@ -25,11 +24,7 @@ export function Products({ products }: ProductsProps) {
       {products.map((p) => {
         const itemInCart = cart.find((prod) => prod.id === p.id);
         return (
-          <SingleProduct
-            cartQnt={itemInCart?.qty || 0}
-            product={p}
-            key={p.id}
-          />
+          <Product cartQnt={itemInCart?.qty || 0} product={p} key={p.id} />
         );
       })}
     </Box>

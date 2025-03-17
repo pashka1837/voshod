@@ -4,6 +4,7 @@ import { faker } from "@faker-js/faker";
 type ProductType = {
   id: string;
   name: string;
+  desc: string;
   price: string;
   popular: boolean;
 };
@@ -29,11 +30,15 @@ export function makeServer({ environment = "test" } = {}) {
         popular(i) {
           return faker.datatype.boolean();
         },
+        desc(i) {
+          return faker.commerce.productDescription();
+        },
       }),
     },
 
     seeds(_server) {
       _server.createList("product", 10);
+      console.log("server", _server.db.dump());
     },
 
     routes() {

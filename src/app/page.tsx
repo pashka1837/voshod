@@ -9,10 +9,10 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const res: any = await fetchProducts(null);
-  const data = JSON.parse(res) as FetchRes<ProductType[]>;
-  if (!data.success) return null;
-  console.log(data);
+  const res = (await fetchProducts(null)) as string;
+  const resData = JSON.parse(res) as FetchRes<ProductType[]>;
+  if (!resData.success) return null;
+  console.log(resData);
 
-  return <ProductsPage initProducts={data.products} />;
+  return <ProductsPage initProducts={resData.data} />;
 }

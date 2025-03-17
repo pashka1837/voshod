@@ -12,15 +12,15 @@ import Link from "next/link";
 import { CartBtns } from "./CartBtns";
 import { memo } from "react";
 
-type SingleProductProps = {
+type ProductProps = {
   product: ProductType;
   cartQnt: number;
 };
 
-export const SingleProduct = memo(function SingleProduct({
+export const Product = memo(function Product({
   product,
   cartQnt,
-}: SingleProductProps) {
+}: ProductProps) {
   return (
     <Card
       variant="outlined"
@@ -30,7 +30,7 @@ export const SingleProduct = memo(function SingleProduct({
         width: { xs: "175px", sm: "200px" },
       }}
     >
-      <Link href={"/"} passHref legacyBehavior>
+      <Link href={`/${product.id}`} passHref legacyBehavior>
         <CardActionArea sx={{ height: "70%" }}>
           <CardContent
             sx={{

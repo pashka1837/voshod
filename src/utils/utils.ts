@@ -1,3 +1,11 @@
+export function createRes(data: unknown, timing: number = 1000) {
+  return new Promise((res) => {
+    setTimeout(() => {
+      res(JSON.stringify(data));
+    }, timing);
+  });
+}
+
 export function getSortQuery(sort: SortState) {
   for (const key in sort) {
     if (sort[key as keyof SortState]) {

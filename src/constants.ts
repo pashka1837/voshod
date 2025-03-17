@@ -1,8 +1,3 @@
-// enum SortDirectionEnum {
-//   ASC = "ASC",
-//   DESC = "DESC",
-// }
-
 export const nameSort: SortingValues[] = [
   {
     value: "DESC",

@@ -32,8 +32,8 @@ export function ProductsPage({ initProducts }: ProductsPageProps) {
     const sortBy = getSortQuery(sort);
     startTrans(async () => {
       const res = (await fetchProducts(sortBy)) as string;
-      const data = JSON.parse(res) as FetchRes<ProductType[]>;
-      if (data.success) startTrans(() => setProducts(data.products));
+      const resData = JSON.parse(res) as FetchRes<ProductType[]>;
+      if (resData.success) startTrans(() => setProducts(resData.data));
     });
   }, [sort.byName, sort.byPrice]);
   return (

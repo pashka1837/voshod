@@ -8,13 +8,14 @@ type ProductType = {
   id: string;
   name: string;
   price: number;
+  desc: string;
   popular: boolean;
 };
 
 type FetchRes<K> =
   | {
       success: true;
-      products: K;
+      data: K;
     }
   | {
       success: false;
