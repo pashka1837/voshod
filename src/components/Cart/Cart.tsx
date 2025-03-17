@@ -19,9 +19,9 @@ export function Cart() {
       {load ? (
         <CircularProgress size={"20px"} color="warning" />
       ) : (
-        <Stack direction={"row"}>
+        <Stack direction={"row"} spacing={1}>
           <ShoppingCartOutlinedIcon />
-          <Typography>{total}</Typography>
+          <Typography>$ {total}</Typography>
         </Stack>
       )}
     </>

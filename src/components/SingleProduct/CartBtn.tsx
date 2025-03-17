@@ -1,6 +1,6 @@
 import { useWaitLocalSt } from "@/lib/hooks";
 import { useCartStore } from "@/store/CartProvider";
-import { Button, Stack } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 import { memo } from "react";
 
 type CartBtnProps = {
@@ -37,17 +37,41 @@ export const CartBtn = memo(function CartBtn({
       spacing={1}
       justifyContent={"center"}
       justifyItems={"center"}
+      alignItems={"center"}
       width={"100%"}
     >
       {cartQnt ? (
         <>
-          <Button onClick={() => changeCartQnt()}>+1</Button>
-          <Button onClick={() => changeCartQnt(false)}>
+          <Button
+            variant="outlined"
+            onClick={() => changeCartQnt()}
+            sx={{ width: "100%" }}
+          >
+            +1
+          </Button>
+          <Typography
+            variant="h6"
+            color="primary"
+            width={"50%"}
+            textAlign={"center"}
+          >
+            {cartQnt}
+          </Typography>
+          <Button
+            variant="outlined"
+            onClick={() => changeCartQnt(false)}
+            sx={{ width: "100%" }}
+          >
             {cartQnt > 1 ? "-1" : "Remove"}
           </Button>
         </>
       ) : (
-        <Button loading={load} variant="outlined" onClick={addToCart}>
+        <Button
+          loading={load}
+          variant="outlined"
+          onClick={addToCart}
+          sx={{ width: "100%" }}
+        >
           Add to Cart
         </Button>
       )}
