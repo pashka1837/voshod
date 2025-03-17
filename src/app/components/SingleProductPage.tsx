@@ -1,4 +1,5 @@
 import { PageWrapper } from "@/components/PageWrapper";
+import { SingleProduct } from "@/components/SingleProduct/SingleProduct";
 
 type SingleProductPageProps = {
   product: ProductType;
@@ -7,7 +8,7 @@ type SingleProductPageProps = {
 export function SingleProductPage({ product }: SingleProductPageProps) {
   return (
     <PageWrapper>
-      <h1>hey</h1>
+      <SingleProduct product={product} />
     </PageWrapper>
   );
 }

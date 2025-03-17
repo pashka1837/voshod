@@ -12,7 +12,6 @@ export default async function Home() {
   const res = (await fetchProducts(null)) as string;
   const resData = JSON.parse(res) as FetchRes<ProductType[]>;
   if (!resData.success) return null;
-  console.log(resData);
 
   return <ProductsPage initProducts={resData.data} />;
 }

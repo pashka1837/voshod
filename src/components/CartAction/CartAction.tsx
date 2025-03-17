@@ -1,19 +1,23 @@
+"use client";
+
 import { useWaitLocalSt } from "@/lib/hooks";
 import { useCartStore } from "@/store/CartProvider";
-import { Button, Stack, Typography } from "@mui/material";
 import { memo } from "react";
+import { CartBtn } from "./CartBtn";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 
-type CartBtnsProps = {
+type CartActionProps = {
   prodId: string;
   price: number;
   cartQnt: number;
 };
 
-export const CartBtns = memo(function CartBtns({
+export const CartAction = memo(function CartAction({
   prodId,
   price,
   cartQnt,
-}: CartBtnsProps) {
+}: CartActionProps) {
   const load = useWaitLocalSt();
   const addProdCart = useCartStore((st) => st.addProdCart);
   const removeProdCart = useCartStore((st) => st.removeProdCart);
@@ -42,13 +46,7 @@ export const CartBtns = memo(function CartBtns({
     >
       {cartQnt ? (
         <>
-          <Button
-            variant="outlined"
-            onClick={() => changeCartQnt()}
-            sx={{ width: "100%" }}
-          >
-            +1
-          </Button>
+          <CartBtn handleClick={changeCartQnt} desc="+1" />
           <Typography
             variant="h6"
             color="primary"
@@ -57,23 +55,13 @@ export const CartBtns = memo(function CartBtns({
           >
             {cartQnt}
           </Typography>
-          <Button
-            variant="outlined"
-            onClick={() => changeCartQnt(false)}
-            sx={{ width: "100%" }}
-          >
-            {cartQnt > 1 ? "-1" : "Remove"}
-          </Button>
+          <CartBtn
+            handleClick={() => changeCartQnt(false)}
+            desc={cartQnt > 1 ? "-1" : "Remove"}
+          />
         </>
       ) : (
-        <Button
-          loading={load}
-          variant="outlined"
-          onClick={addToCart}
-          sx={{ width: "100%" }}
-        >
-          Add to Cart
-        </Button>
+        <CartBtn isLoading={load} handleClick={addToCart} desc="Add to cart" />
       )}
     </Stack>
   );
