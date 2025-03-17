@@ -1,4 +1,4 @@
-export const products = [
+export const products: ProductType[] = [
   {
     id: "xzW29by6fQR1lTfZ4F2sC",
     name: "Tasty Steel Pizza",

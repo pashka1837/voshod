@@ -3,17 +3,17 @@ import { useCartStore } from "@/store/CartProvider";
 import { Button, Stack, Typography } from "@mui/material";
 import { memo } from "react";
 
-type CartBtnProps = {
+type CartBtnsProps = {
   prodId: string;
   price: number;
   cartQnt: number;
 };
 
-export const CartBtn = memo(function CartBtn({
+export const CartBtns = memo(function CartBtns({
   prodId,
   price,
   cartQnt,
-}: CartBtnProps) {
+}: CartBtnsProps) {
   const load = useWaitLocalSt();
   const addProdCart = useCartStore((st) => st.addProdCart);
   const removeProdCart = useCartStore((st) => st.removeProdCart);

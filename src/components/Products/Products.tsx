@@ -1,26 +1,25 @@
 "use client";
 
-import { Box } from "@mui/material";
-import { useState } from "react";
+import { Box, Typography } from "@mui/material";
 import { SingleProduct } from "../SingleProduct/SingleProduct";
 import { useCartStore } from "@/store/CartProvider";
 
 type ProductsProps = {
-  initProducts: ProductType[];
+  products: ProductType[];
 };
 
-export function Products({ initProducts }: ProductsProps) {
-  const [products, setProducts] = useState(initProducts);
+export function Products({ products }: ProductsProps) {
   const cart = useCartStore((st) => st.cart);
+  console.log(products);
   return (
     <Box
       sx={{
-        p: { xs: 2, md: 3, xl: 6 },
         display: "grid",
         gridTemplateColumns: `repeat(auto-fill, minmax(175px,200px))`,
         justifyContent: "center",
         justifyItems: "center",
         gap: { xs: "20px" },
+        width: "100%",
       }}
     >
       {products.map((p) => {

@@ -1,11 +1,14 @@
 "use server";
 
 import { products } from "@/db/db";
+import { getDataSorted } from "@/utils/utils";
 
-export async function fetchProducts(q?: string) {
+export async function fetchProducts(sortBy: SortQuery | null) {
+  const sortedData = getDataSorted(products, sortBy);
+
   return new Promise((res) => {
     setTimeout(() => {
-      res(JSON.stringify({ products, success: true }));
+      res(JSON.stringify({ products: sortedData, success: true }));
     }, 1000);
   });
 }

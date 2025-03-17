@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import Link from "next/link";
-import { CartBtn } from "./CartBtn";
+import { CartBtns } from "./CartBtns";
 import { memo } from "react";
 
 type SingleProductProps = {
@@ -58,7 +58,7 @@ export const SingleProduct = memo(function SingleProduct({
       </Link>
 
       <CardActions>
-        <CartBtn prodId={product.id} price={product.price} cartQnt={cartQnt} />
+        <CartBtns prodId={product.id} price={product.price} cartQnt={cartQnt} />
       </CardActions>
     </Card>
   );
