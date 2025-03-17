@@ -1,13 +1,13 @@
 "use client";
 
+import { useWaitLocalSt } from "@/lib/hooks";
 import { useCartStore } from "@/store/CartProvider";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { Stack, Typography, CircularProgress } from "@mui/material";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 
 export function Cart() {
-  const [load, setLoad] = useState(true);
-  useEffect(() => setLoad(false), []);
+  const load = useWaitLocalSt();
 
   const cart = useCartStore((st) => st.cart);
   const total = useMemo(() => {

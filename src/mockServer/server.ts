@@ -39,10 +39,14 @@ export function makeServer({ environment = "test" } = {}) {
     routes() {
       this.passthrough();
       this.namespace = "api";
-      this.get("/products", (schema, request) => {
-        const { filter } = request.queryParams;
-        return schema.all("product");
-      });
+      this.get(
+        "/products",
+        (schema, request) => {
+          const { filter } = request.queryParams;
+          return schema.all("product");
+        },
+        { timing: 1000 }
+      );
     },
   });
 }

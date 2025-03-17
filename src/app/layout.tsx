@@ -5,7 +5,6 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import { Roboto } from "next/font/google";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "@/theme/muiTheme";
-import MirageServer from "@/mockServer/MirageJS";
 import { CartStoreProvider } from "@/store/CartProvider";
 import { NavBar } from "@/components/NavBar/NavBar";
 
@@ -17,7 +16,7 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "Sunrise Store",
+  title: { template: "%s | Sunrise Store", default: "Sunrise Store" },
   description: "Sunrise Super Store",
 };
 
@@ -29,7 +28,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={roboto.variable}>
-        <MirageServer />
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <CartStoreProvider>
