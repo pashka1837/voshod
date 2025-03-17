@@ -1,25 +1,23 @@
 import { useWaitLocalSt } from "@/lib/hooks";
 import { useCartStore } from "@/store/CartProvider";
 import { Button, Stack } from "@mui/material";
-import { useMemo } from "react";
+import { memo } from "react";
 
 type CartBtnProps = {
   prodId: string;
   price: number;
+  cartQnt: number;
 };
 
-export function CartBtn({ prodId, price }: CartBtnProps) {
-  console.log(prodId);
+export const CartBtn = memo(function CartBtn({
+  prodId,
+  price,
+  cartQnt,
+}: CartBtnProps) {
   const load = useWaitLocalSt();
-
-  const { cart, addProdCart, removeProdCart, changeQnt } = useCartStore(
-    (st) => st
-  );
-
-  const cartQnt = useMemo(() => {
-    const itemInCart = cart.find((prod) => prod.id === prodId);
-    return itemInCart?.qty || 0;
-  }, [cart, prodId]);
+  const addProdCart = useCartStore((st) => st.addProdCart);
+  const removeProdCart = useCartStore((st) => st.removeProdCart);
+  const changeQnt = useCartStore((st) => st.changeQnt);
 
   function addToCart() {
     addProdCart({ id: prodId, price, qty: 1 });
@@ -32,8 +30,6 @@ export function CartBtn({ prodId, price }: CartBtnProps) {
       else changeQnt({ id: prodId, price, qty: cartQnt - 1 });
     }
   }
-
-  //   if (load) return <CircularProgress size={"10px"} color="primary" />;
 
   return (
     <Stack
@@ -55,18 +51,6 @@ export function CartBtn({ prodId, price }: CartBtnProps) {
           Add to Cart
         </Button>
       )}
-      {/* {cartQnt ? (
-        <>
-          <Button onClick={() => changeCartQnt()}>+1</Button>
-          <Button onClick={() => changeCartQnt(false)}>
-            {cartQnt > 1 ? "-1" : "Remove"}
-          </Button>
-        </>
-      ) : (
-        <Button variant="outlined" onClick={addToCart}>
-          Add to Cart
-        </Button>
-      )} */}
     </Stack>
   );
-}
+});

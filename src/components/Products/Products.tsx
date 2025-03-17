@@ -11,7 +11,7 @@ type ProductsProps = {
 
 export function Products({ initProducts }: ProductsProps) {
   const [products, setProducts] = useState(initProducts);
-  //   const cart = useCartStore((st) => st.cart);
+  const cart = useCartStore((st) => st.cart);
   return (
     <Box
       sx={{
@@ -23,9 +23,16 @@ export function Products({ initProducts }: ProductsProps) {
         gap: { xs: "20px" },
       }}
     >
-      {products.map((p) => (
-        <SingleProduct product={p} key={p.id} />
-      ))}
+      {products.map((p) => {
+        const itemInCart = cart.find((prod) => prod.id === p.id);
+        return (
+          <SingleProduct
+            cartQnt={itemInCart?.qty || 0}
+            product={p}
+            key={p.id}
+          />
+        );
+      })}
     </Box>
   );
 }

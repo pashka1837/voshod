@@ -1,6 +1,5 @@
 "use client";
 
-import { useCartStore } from "@/store/CartProvider";
 import {
   Card,
   CardActionArea,
@@ -11,13 +10,17 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import { CartBtn } from "./CartBtn";
+import { memo } from "react";
 
 type SingleProductProps = {
   product: ProductType;
+  cartQnt: number;
 };
 
-export function SingleProduct({ product }: SingleProductProps) {
-  console.log("product", product.name);
+export const SingleProduct = memo(function SingleProduct({
+  product,
+  cartQnt,
+}: SingleProductProps) {
   return (
     <Card
       variant="outlined"
@@ -55,8 +58,8 @@ export function SingleProduct({ product }: SingleProductProps) {
       </Link>
 
       <CardActions>
-        <CartBtn prodId={product.id} price={product.price} />
+        <CartBtn prodId={product.id} price={product.price} cartQnt={cartQnt} />
       </CardActions>
     </Card>
   );
-}
+});
