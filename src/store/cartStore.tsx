@@ -18,11 +18,12 @@ export const createCartStore = () =>
       (set, get) => ({
         cart: get()?.cart || [],
         addProdCart: (newProd) => set({ cart: [...get().cart, newProd] }),
+
         removeProdCart: (remId) =>
           set({ cart: get().cart.filter((prod) => prod.id !== remId) }),
       }),
       {
-        name: "cart",
+        name: "productsCart",
         storage: createJSONStorage(() => localStorage),
       }
     )

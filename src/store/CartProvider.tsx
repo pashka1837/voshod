@@ -26,12 +26,21 @@ export const CartStoreProvider = ({ children }: CartStoreProviderProps) => {
   );
 };
 
-export const useCartStore = <T,>(selector: (store: CartStore) => T): T => {
+export const useCartStore = <T,>(selector: (store: CartStore) => T) => {
   const cartStoreContext = useContext(CartStoreContext);
 
   if (!cartStoreContext) {
     throw new Error(`useCartStore must be used within CartStoreProvider`);
   }
 
+  //   const result = cartStoreContext(selector);
+
+  //   const [data, setData] = useState<T>({ ...result });
+
+  //   useEffect(() => {
+  //     setData(result);
+  //   }, [result]);
+
+  //   return data;
   return useStore(cartStoreContext, selector);
 };

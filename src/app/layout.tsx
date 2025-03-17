@@ -7,6 +7,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "@/theme/muiTheme";
 import MirageServer from "@/mockServer/MirageJS";
 import { CartStoreProvider } from "@/store/CartProvider";
+import { NavBar } from "@/components/NavBar/NavBar";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700", "800", "900"],
@@ -31,7 +32,10 @@ export default function RootLayout({
         <MirageServer />
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
-            <CartStoreProvider>{children}</CartStoreProvider>
+            <CartStoreProvider>
+              <NavBar />
+              {children}
+            </CartStoreProvider>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
