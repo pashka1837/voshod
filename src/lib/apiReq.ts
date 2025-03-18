@@ -4,7 +4,7 @@ import { products } from "@/db/db";
 import { createRes, getDataSorted } from "@/utils/utils";
 
 export async function fetchProducts(sortBy: SortQuery | null) {
-  const sortedData = getDataSorted(products, sortBy);
+  const sortedData = getDataSorted([...products], sortBy);
   const res: FetchRes<ProductType[]> = {
     data: sortedData,
     success: true,

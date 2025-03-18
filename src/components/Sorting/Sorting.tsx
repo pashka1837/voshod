@@ -5,6 +5,7 @@ import { Dispatch, SetStateAction } from "react";
 import { SortingSelect } from "./SortingSelect";
 import Stack from "@mui/material/Stack";
 import { SelectChangeEvent } from "@mui/material/Select";
+import { ClearBtn } from "./ClearBtn";
 
 type SortProps = {
   sort: SortState;
@@ -35,6 +36,7 @@ export function Sorting({ sort, setSort }: SortProps) {
         sortVals={priceSort}
         onChangeFn={handleSortByPrice}
       />
+      <ClearBtn setSort={setSort} sort={sort} />
     </Stack>
   );
 }

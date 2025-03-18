@@ -30,7 +30,8 @@ export function getDataSorted(dataAr: ProductType[], sortBy: SortQuery | null) {
         if (sortBy.value === "DESC") return a.name.localeCompare(b.name);
         return b.name.localeCompare(a.name);
       });
-
+    case undefined:
+      return dataAr;
     default:
       return dataAr;
   }
