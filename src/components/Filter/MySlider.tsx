@@ -27,7 +27,7 @@ export function MySlider({ filter, setFilter }: MySliderProps) {
     setFilter({ ...filter, priceMin: newValue[0], priceMax: newValue[1] });
   }
   return (
-    <Stack direction={"column"} sx={{ maxWidth: "286px", width: "100%" }}>
+    <Stack direction={"column"} sx={{ maxWidth: "266px", width: "100%" }}>
       <Typography variant="body1">Price range</Typography>
       <Slider
         onChange={handlePriceRange}

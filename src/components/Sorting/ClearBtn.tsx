@@ -1,5 +1,6 @@
 "use client";
 
+import { initSort } from "@/constants";
 import { Button } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
 
@@ -15,7 +16,7 @@ export function ClearBtn({ setSort, sort }: ClearBtnProps) {
       fullWidth
       sx={{ minWidth: "100px", maxWidth: { sm: "286px" } }}
       size="small"
-      onClick={() => setSort({ byName: "", byPrice: "" })}
+      onClick={() => setSort(initSort)}
     >
       Clear sorting
     </Button>

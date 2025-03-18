@@ -24,7 +24,6 @@ export function Sorting({ sort, setSort }: SortProps) {
     <Stack
       direction={{ xs: "column", sm: "row" }}
       justifyContent={"flex-start"}
-      // flexWrap={"wrap"}
       spacing={2}
       sx={{ width: "100%" }}
     >
