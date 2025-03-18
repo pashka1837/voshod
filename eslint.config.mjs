@@ -7,15 +7,17 @@ const __dirname = dirname(__filename);
 
 const compat = new FlatCompat({
   baseDirectory: __dirname,
+ 
 });
 
+compat.config({
+  rules: {
+    "react-hooks/exhaustive-deps":'warn',
+  "@typescript-eslint/no-explicit-any":'warn'}  
+})
+
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript",
-  ...compat.config({
-    // rules: {
-    //   "@typescript-eslint/no-explicit-any":'warn'
-    // }
-  })
+  ...compat.extends("next/core-web-vitals", "next/typescript", 
   ),
     
 ];

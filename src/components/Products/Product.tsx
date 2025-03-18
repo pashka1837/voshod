@@ -51,7 +51,9 @@ export const Product = memo(function Product({
 
             <Stack direction={"row"} spacing={2} alignItems={"center"}>
               <Typography variant="subtitle2">Price: </Typography>
-              <Typography variant="body1">$ {product.price}</Typography>
+              <Typography color="success" variant="body1">
+                $ {product.price}
+              </Typography>
             </Stack>
           </CardContent>
         </CardActionArea>

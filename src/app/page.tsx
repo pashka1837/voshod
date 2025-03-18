@@ -1,6 +1,4 @@
-import { Products } from "@/components/Products/Products";
 import { fetchProducts } from "@/lib/apiReq";
-import { Box, Stack } from "@mui/material";
 import { Metadata } from "next";
 import { ProductsPage } from "./components/ProductsPage";
 
