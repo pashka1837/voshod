@@ -1,5 +1,5 @@
 import { PageWrapper } from "@/components/PageWrapper";
-import { SingleProduct } from "@/components/SingleProduct/SingleProduct";
+import { SingleProduct } from "@/components/SingleProduct";
 
 type SingleProductPageProps = {
   product: ProductType;

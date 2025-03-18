@@ -26,7 +26,7 @@ export const Product = memo(function Product({
       variant="outlined"
       sx={{
         borderColor: "var(--mui-palette-primary-main)",
-        height: "170px",
+        height: "180px",
         maxWidth: { xs: "380px", sm: "200px" },
         minWidth: "170px",
         width: "100%",

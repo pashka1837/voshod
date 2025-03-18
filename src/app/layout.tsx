@@ -6,7 +6,7 @@ import { Roboto } from "next/font/google";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "@/theme/muiTheme";
 import { CartStoreProvider } from "@/store/CartProvider";
-import { NavBar } from "@/components/NavBar/NavBar";
+import { NavBar } from "@/components/NavBar";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700", "800", "900"],

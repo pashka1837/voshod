@@ -22,7 +22,7 @@ export function SortingSelect({
     <FormControl
       size="small"
       fullWidth
-      sx={{ minWidth: "140px", maxWidth: { sm: "286px" } }}
+      sx={{ minWidth: "140px", maxWidth: { md: "296px" } }}
     >
       <InputLabel id={labelId}>{label}</InputLabel>
       <Select

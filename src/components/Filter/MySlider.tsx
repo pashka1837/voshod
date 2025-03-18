@@ -13,23 +13,36 @@ type MySliderProps = {
 };
 
 export function MySlider({ filter, setFilter }: MySliderProps) {
-  function valueToText(value: number) {
-    return `${value}$`;
-  }
-
   function handlePriceRange(event: Event, newValue: number | number[]) {
     if (!Array.isArray(newValue)) return;
-    console.log(newValue);
     const newMin = newValue[0];
     const newMax = newValue[1];
 
     if (newMax - newMin <= 1000) return;
     setFilter({ ...filter, priceMin: newValue[0], priceMax: newValue[1] });
   }
+
+  function handleMaxPrice() {
+    setFilter({ ...filter, priceMax: initFilter.priceMax });
+  }
+
+  function handleMinPrice() {
+    setFilter({ ...filter, priceMin: initFilter.priceMin });
+  }
+
+  function valueToText(value: number) {
+    return `${value}$`;
+  }
+
   return (
-    <Stack direction={"column"} sx={{ maxWidth: "266px", width: "100%" }}>
+    <Stack direction={"column"} sx={{ width: "100%" }}>
       <Typography variant="body1">Price range</Typography>
       <Slider
+        sx={{
+          maxWidth: { xs: "calc(100% - 20px)", md: "276px" },
+          width: "100%",
+          ml: "10px!important",
+        }}
         onChange={handlePriceRange}
         aria-label="price range"
         min={initFilter.priceMin}
@@ -42,18 +55,14 @@ export function MySlider({ filter, setFilter }: MySliderProps) {
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Typography
           variant="body2"
-          onClick={() =>
-            setFilter({ ...filter, priceMin: initFilter.priceMin })
-          }
+          onClick={handleMinPrice}
           sx={{ cursor: "pointer" }}
         >
           {initFilter.priceMin} $
         </Typography>
         <Typography
           variant="body2"
-          onClick={() =>
-            setFilter({ ...filter, priceMax: initFilter.priceMax })
-          }
+          onClick={handleMaxPrice}
           sx={{ cursor: "pointer" }}
         >
           {initFilter.priceMax} $

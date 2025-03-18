@@ -1,11 +1,11 @@
 "use cleint";
 
-import { nameSort, priceSort } from "@/constants";
+import { initSort, nameSort, priceSort } from "@/constants";
 import { Dispatch, SetStateAction } from "react";
 import { SortingSelect } from "./SortingSelect";
-import Stack from "@mui/material/Stack";
 import { SelectChangeEvent } from "@mui/material/Select";
-import { ClearBtn } from "./ClearBtn";
+import { ManagmentWrapper } from "../ManagmentWrap";
+import { ClearMngBtn } from "../ClearMngBtn";
 
 type SortProps = {
   sort: SortState;
@@ -20,13 +20,15 @@ export function Sorting({ sort, setSort }: SortProps) {
   function handleSortByPrice(event: SelectChangeEvent) {
     setSort({ byName: "", byPrice: event.target.value as SortDirection });
   }
+
+  function handleClear() {
+    setSort(initSort);
+  }
+
+  const isStateChanged = JSON.stringify(initSort) !== JSON.stringify(sort);
+
   return (
-    <Stack
-      direction={{ xs: "column", sm: "row" }}
-      justifyContent={"flex-start"}
-      spacing={2}
-      sx={{ width: "100%" }}
-    >
+    <ManagmentWrapper>
       <SortingSelect
         value={sort.byName}
         label="Sort by name"
@@ -41,7 +43,12 @@ export function Sorting({ sort, setSort }: SortProps) {
         sortVals={priceSort}
         onChangeFn={handleSortByPrice}
       />
-      <ClearBtn setSort={setSort} sort={sort} />
-    </Stack>
+
+      <ClearMngBtn
+        isShow={isStateChanged}
+        handleClear={handleClear}
+        title="Clear sorting"
+      />
+    </ManagmentWrapper>
   );
 }

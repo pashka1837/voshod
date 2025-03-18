@@ -1,5 +1,5 @@
 import { AppBar } from "@mui/material";
-import { Cart } from "../Cart/Cart";
+import { Cart } from "./Cart";
 
 export function NavBar() {
   return (

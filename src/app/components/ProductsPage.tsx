@@ -1,9 +1,7 @@
 "use client";
 
-import { Filter } from "@/components/Filter/Filter";
-import { PageWrapper } from "@/components/PageWrapper";
+import { ProdManagment } from "@/components/ProdManagment";
 import { Products } from "@/components/Products/Products";
-import { Sorting } from "@/components/Sorting/Sorting";
 import { initFilter, initSort } from "@/constants";
 import { fetchProducts } from "@/lib/apiReq";
 import { getSortQuery } from "@/utils/utils";
@@ -46,14 +44,19 @@ export function ProductsPage({ initProducts }: ProductsPageProps) {
         gap: "40px",
       }}
     >
-      <Filter setFilter={setFilter} filter={filter} />
+      <ProdManagment
+        filter={filter}
+        setFilter={setFilter}
+        sort={sort}
+        setSort={setSort}
+      />
+
       <Stack
         direction={"column"}
         alignItems={"center"}
         spacing={4}
         width={"100%"}
       >
-        <Sorting sort={sort} setSort={setSort} />
         {isPending && <CircularProgress />}
         {products.length ? (
           <Products products={products} />

@@ -6,7 +6,7 @@ import CardContent from "@mui/material/CardContent";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { useCartStore } from "@/store/CartProvider";
-import { CartAction } from "../CartAction/CartAction";
+import { CartAction } from "./CartAction/CartAction";
 
 type SingleProductProps = {
   product: ProductType;

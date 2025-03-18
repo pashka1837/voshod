@@ -1,9 +1,9 @@
-"use client";
-
-import Box from "@mui/material/Box";
 import { Dispatch, SetStateAction } from "react";
 import { MySlider } from "./MySlider";
 import { FilterPopular } from "./FilterPopular";
+import { ManagmentWrapper } from "../ManagmentWrap";
+import { initFilter } from "@/constants";
+import { ClearMngBtn } from "../ClearMngBtn";
 
 type FilterProps = {
   filter: FilterState;
@@ -11,19 +11,22 @@ type FilterProps = {
 };
 
 export function Filter({ filter, setFilter }: FilterProps) {
+  const isStateChanged = JSON.stringify(initFilter) !== JSON.stringify(filter);
+
+  function handleClear() {
+    setFilter(initFilter);
+  }
+
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        width: "100%",
-        gap: "20px",
-        maxWidth: { xs: "100%", md: "286px" },
-      }}
-    >
+    <ManagmentWrapper>
       <MySlider filter={filter} setFilter={setFilter} />
       <FilterPopular filter={filter} setFilter={setFilter} />
-    </Box>
+
+      <ClearMngBtn
+        isShow={isStateChanged}
+        handleClear={handleClear}
+        title="Clear filters"
+      />
+    </ManagmentWrapper>
   );
 }
