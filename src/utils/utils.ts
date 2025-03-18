@@ -6,7 +6,8 @@ export function createRes(data: unknown, timing: number = 1000) {
   });
 }
 
-export function getSortQuery(sort: SortState) {
+export function getSortQuery(sort: SortState | null) {
+  if (!sort) return null;
   for (const key in sort) {
     if (sort[key as keyof SortState]) {
       return {
@@ -16,6 +17,20 @@ export function getSortQuery(sort: SortState) {
     }
   }
   return null;
+}
+
+export function getParams(searchParams: { [key: string]: string | undefined }) {
+  const paramsSort = JSON.parse(
+    searchParams["sort"] || "null"
+  ) as SortState | null;
+  const paramsFilter = JSON.parse(
+    searchParams["filter"] || "null"
+  ) as FilterState | null;
+
+  return {
+    paramsSort,
+    paramsFilter,
+  };
 }
 
 export function getDataSorted(dataAr: ProductType[], sortBy: SortQuery | null) {
@@ -35,4 +50,24 @@ export function getDataSorted(dataAr: ProductType[], sortBy: SortQuery | null) {
     default:
       return dataAr;
   }
+}
+
+export function getDataFiltered(
+  dataAr: ProductType[],
+  filter: FilterState | null
+) {
+  if (!filter) return dataAr;
+  for (const key in filter) {
+    switch (key) {
+      case "isPopular":
+        if (filter[key]) dataAr = dataAr.filter((d) => d.popular);
+      case "priceMin":
+        dataAr = dataAr.filter((d) => d.price >= filter["priceMin"]);
+      case "priceMax":
+        dataAr = dataAr.filter((d) => d.price <= filter["priceMax"]);
+      default:
+        break;
+    }
+  }
+  return dataAr;
 }

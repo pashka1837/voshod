@@ -3,22 +3,33 @@
 import { ProdManagment } from "@/components/ProdManagment";
 import { Products } from "@/components/Products/Products";
 import { initFilter, initSort } from "@/constants";
-import { fetchProducts } from "@/lib/apiReq";
-import { getSortQuery } from "@/utils/utils";
+import { fetchProductsCached } from "@/lib/apiReq";
 import { Box, Stack, Typography } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
 
 type ProductsPageProps = {
   initProducts: ProductType[];
+  paramsSort: SortState | null;
+  paramsFilter: FilterState | null;
 };
 
-export function ProductsPage({ initProducts }: ProductsPageProps) {
+export function ProductsPage({
+  initProducts,
+  paramsSort,
+  paramsFilter,
+}: ProductsPageProps) {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+  const params = new URLSearchParams(searchParams);
+
   const [initLoad, setInitLoad] = useState(true);
   const [products, setProducts] = useState(initProducts);
 
-  const [sort, setSort] = useState<SortState>(initSort);
-  const [filter, setFilter] = useState<FilterState>(initFilter);
+  const [sort, setSort] = useState<SortState>(paramsSort || initSort);
+  const [filter, setFilter] = useState<FilterState>(paramsFilter || initFilter);
 
   const [isPending, startTrans] = useTransition();
 
@@ -27,9 +38,12 @@ export function ProductsPage({ initProducts }: ProductsPageProps) {
       setInitLoad(false);
       return;
     }
-    const sortBy = getSortQuery(sort);
+    params.set("sort", JSON.stringify(sort));
+    params.set("filter", JSON.stringify(filter));
+    replace(`${pathname}?${params.toString()}`);
+
     startTrans(async () => {
-      const res = (await fetchProducts(sortBy)) as string;
+      const res = (await fetchProductsCached(sort, filter)) as string;
       const resData = JSON.parse(res) as FetchRes<ProductType[]>;
       if (resData.success) startTrans(() => setProducts(resData.data));
     });

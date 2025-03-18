@@ -12,7 +12,7 @@ async function getProduct(id: string) {
 }
 
 export async function generateStaticParams() {
-  const res = (await fetchProducts(null)) as string;
+  const res = (await fetchProducts(null, null)) as string;
   const resData = JSON.parse(res) as FetchRes<ProductType[]>;
   if (!resData.success) return [];
   return resData.data.map((prod) => ({
