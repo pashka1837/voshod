@@ -21,7 +21,13 @@ export function Sorting({ sort, setSort }: SortProps) {
     setSort({ byName: "", byPrice: event.target.value as SortDirection });
   }
   return (
-    <Stack direction={"row"} spacing={2}>
+    <Stack
+      direction={{ xs: "column", sm: "row" }}
+      justifyContent={"flex-start"}
+      // flexWrap={"wrap"}
+      spacing={2}
+      sx={{ width: "100%" }}
+    >
       <SortingSelect
         value={sort.byName}
         label="Sort by name"

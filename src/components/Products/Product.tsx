@@ -27,7 +27,9 @@ export const Product = memo(function Product({
       sx={{
         borderColor: "var(--mui-palette-primary-main)",
         height: "170px",
-        width: { xs: "175px", sm: "200px" },
+        maxWidth: { xs: "380px", sm: "200px" },
+        minWidth: "170px",
+        width: "100%",
       }}
     >
       <Link href={`/${product.id}`} passHref legacyBehavior>

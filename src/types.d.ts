@@ -38,3 +38,9 @@ type SortQuery = {
   key: keyof SortState;
   value: SortDirection;
 };
+
+type FilterState = {
+  isPopular: boolean;
+  priceMin: number | null;
+  priceMax: number | null;
+};

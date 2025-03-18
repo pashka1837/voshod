@@ -14,10 +14,10 @@ export function Products({ products }: ProductsProps) {
     <Box
       sx={{
         display: "grid",
-        gridTemplateColumns: `repeat(auto-fill, minmax(175px,200px))`,
+        gridTemplateColumns: `repeat(auto-fill, minmax(170px, 1fr))`,
         justifyContent: "center",
-        justifyItems: "center",
-        gap: { xs: "20px" },
+        justifyItems: "start",
+        gap: "15px",
         width: "100%",
       }}
     >

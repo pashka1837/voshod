@@ -11,6 +11,13 @@ type ClearBtnProps = {
 export function ClearBtn({ setSort, sort }: ClearBtnProps) {
   if (!sort.byName && !sort.byPrice) return null;
   return (
-    <Button onClick={() => setSort({ byName: "", byPrice: "" })}>Clear</Button>
+    <Button
+      fullWidth
+      sx={{ minWidth: "100px", maxWidth: { sm: "286px" } }}
+      size="small"
+      onClick={() => setSort({ byName: "", byPrice: "" })}
+    >
+      Clear sorting
+    </Button>
   );
 }

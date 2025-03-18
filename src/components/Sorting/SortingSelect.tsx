@@ -19,9 +19,14 @@ export function SortingSelect({
   value,
 }: SortingSelectProps) {
   return (
-    <FormControl fullWidth sx={{ minWidth: "140px" }}>
+    <FormControl
+      size="small"
+      fullWidth
+      sx={{ minWidth: "140px", maxWidth: { sm: "286px" } }}
+    >
       <InputLabel id={labelId}>{label}</InputLabel>
       <Select
+        size="small"
         labelId={labelId}
         label={label}
         value={value}
