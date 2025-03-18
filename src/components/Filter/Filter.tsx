@@ -2,6 +2,7 @@
 
 import Box from "@mui/material/Box";
 import { Dispatch, SetStateAction } from "react";
+import { MySlider } from "./MySlider";
 
 type FilterProps = {
   filter: FilterState;
@@ -15,10 +16,10 @@ export function Filter({ filter, setFilter }: FilterProps) {
         display: "flex",
         direction: "column",
         width: "100%",
-        maxWidth: { xs: "100%", md: "200px" },
+        maxWidth: { xs: "100%", md: "286px" },
       }}
     >
-      Filter
+      <MySlider filter={filter} setFilter={setFilter} />
     </Box>
   );
 }

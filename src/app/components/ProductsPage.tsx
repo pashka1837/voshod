@@ -4,6 +4,7 @@ import { Filter } from "@/components/Filter/Filter";
 import { PageWrapper } from "@/components/PageWrapper";
 import { Products } from "@/components/Products/Products";
 import { Sorting } from "@/components/Sorting/Sorting";
+import { initFilter, initSort } from "@/constants";
 import { fetchProducts } from "@/lib/apiReq";
 import { getSortQuery } from "@/utils/utils";
 import { Box, Stack, Typography } from "@mui/material";
@@ -12,16 +13,6 @@ import { useEffect, useState, useTransition } from "react";
 
 type ProductsPageProps = {
   initProducts: ProductType[];
-};
-const initSort: SortState = {
-  byPrice: "",
-  byName: "",
-};
-
-const initFilter: FilterState = {
-  priceMax: null,
-  priceMin: null,
-  isPopular: false,
 };
 
 export function ProductsPage({ initProducts }: ProductsPageProps) {
@@ -44,7 +35,7 @@ export function ProductsPage({ initProducts }: ProductsPageProps) {
       const resData = JSON.parse(res) as FetchRes<ProductType[]>;
       if (resData.success) startTrans(() => setProducts(resData.data));
     });
-  }, [sort, filter]);
+  }, [sort]);
 
   return (
     <Box
@@ -52,7 +43,7 @@ export function ProductsPage({ initProducts }: ProductsPageProps) {
         display: "flex",
         flexDirection: { xs: "column", md: "row" },
         p: { xs: 3, md: 4, xl: 6 },
-        gap: "20px",
+        gap: "40px",
       }}
     >
       <Filter setFilter={setFilter} filter={filter} />

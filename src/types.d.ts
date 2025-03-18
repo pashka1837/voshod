@@ -41,6 +41,6 @@ type SortQuery = {
 
 type FilterState = {
   isPopular: boolean;
-  priceMin: number | null;
-  priceMax: number | null;
+  priceMin: number;
+  priceMax: number;
 };
