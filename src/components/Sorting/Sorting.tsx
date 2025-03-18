@@ -1,7 +1,7 @@
 "use cleint";
 
 import { initSort, nameSort, priceSort } from "@/constants";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, memo, SetStateAction } from "react";
 import { SortingSelect } from "./SortingSelect";
 import { SelectChangeEvent } from "@mui/material/Select";
 import { ManagmentWrapper } from "../ManagmentWrap";
@@ -12,7 +12,7 @@ type SortProps = {
   setSort: Dispatch<SetStateAction<SortState>>;
 };
 
-export function Sorting({ sort, setSort }: SortProps) {
+export const Sorting = memo(function Sorting({ sort, setSort }: SortProps) {
   function handleSortByName(event: SelectChangeEvent) {
     setSort({ byPrice: "", byName: event.target.value as SortDirection });
   }
@@ -51,4 +51,4 @@ export function Sorting({ sort, setSort }: SortProps) {
       />
     </ManagmentWrapper>
   );
-}
+});

@@ -38,16 +38,17 @@ export function ProductsPage({
       setInitLoad(false);
       return;
     }
-    params.set("sort", JSON.stringify(sort));
-    params.set("filter", JSON.stringify(filter));
-    replace(`${pathname}?${params.toString()}`);
-
     startTrans(async () => {
       const res = (await fetchProductsCached(sort, filter)) as string;
       const resData = JSON.parse(res) as FetchRes<ProductType[]>;
-      if (resData.success) startTrans(() => setProducts(resData.data));
+      startTrans(() => {
+        params.set("sort", JSON.stringify(sort));
+        params.set("filter", JSON.stringify(filter));
+        replace(`${pathname}?${params.toString()}`);
+        if (resData.success) setProducts(resData.data);
+      });
     });
-  }, [sort]);
+  }, [sort, filter]);
 
   return (
     <Box

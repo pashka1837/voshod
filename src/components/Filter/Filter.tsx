@@ -1,4 +1,6 @@
-import { Dispatch, SetStateAction } from "react";
+"use client";
+
+import { Dispatch, memo, SetStateAction } from "react";
 import { MySlider } from "./MySlider";
 import { FilterPopular } from "./FilterPopular";
 import { ManagmentWrapper } from "../ManagmentWrap";
@@ -10,7 +12,7 @@ type FilterProps = {
   setFilter: Dispatch<SetStateAction<FilterState>>;
 };
 
-export function Filter({ filter, setFilter }: FilterProps) {
+export const Filter = memo(function Filter({ filter, setFilter }: FilterProps) {
   const isStateChanged = JSON.stringify(initFilter) !== JSON.stringify(filter);
 
   function handleClear() {
@@ -29,4 +31,4 @@ export function Filter({ filter, setFilter }: FilterProps) {
       />
     </ManagmentWrapper>
   );
-}
+});

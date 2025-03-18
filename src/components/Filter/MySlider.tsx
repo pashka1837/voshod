@@ -5,28 +5,51 @@ import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
+import { useDebouncedCallback } from "use-debounce";
 
 type MySliderProps = {
   filter: FilterState;
   setFilter: Dispatch<SetStateAction<FilterState>>;
 };
 
+type PriceRangeType = Omit<FilterState, "isPopular">;
+
 export function MySlider({ filter, setFilter }: MySliderProps) {
+  const [priceRange, setPriceRange] = useState<PriceRangeType>({
+    ...filter,
+  });
+
+  const debounceSetFilter = useDebouncedCallback(setFilter, 500);
+
   function handlePriceRange(event: Event, newValue: number | number[]) {
     if (!Array.isArray(newValue)) return;
     const newMin = newValue[0];
     const newMax = newValue[1];
 
     if (newMax - newMin <= 1000) return;
-    setFilter({ ...filter, priceMin: newValue[0], priceMax: newValue[1] });
+    setPriceRange({
+      priceMin: newValue[0],
+      priceMax: newValue[1],
+    });
+
+    debounceSetFilter({
+      ...filter,
+      priceMin: newValue[0],
+      priceMax: newValue[1],
+    });
   }
 
   function handleMaxPrice() {
+    if (priceRange.priceMax === initFilter.priceMax) return;
+    setPriceRange({ ...priceRange, priceMax: initFilter.priceMax });
     setFilter({ ...filter, priceMax: initFilter.priceMax });
   }
 
   function handleMinPrice() {
+    if (priceRange.priceMin === initFilter.priceMin) return;
+    setPriceRange({ ...priceRange, priceMin: initFilter.priceMin });
+
     setFilter({ ...filter, priceMin: initFilter.priceMin });
   }
 
@@ -50,7 +73,7 @@ export function MySlider({ filter, setFilter }: MySliderProps) {
         step={100}
         valueLabelDisplay="auto"
         getAriaValueText={valueToText}
-        value={[filter.priceMin, filter.priceMax]}
+        value={[priceRange.priceMin, priceRange.priceMax]}
       />
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Typography
