@@ -1,5 +1,12 @@
 # Sunrise Test Task
 
+## Details
+
+    fully responsive design
+    cart values are loaded from localStorage
+    fetch products fn is cached
+    single product pages are SSG
+
 ## before start
 
 clone repository
