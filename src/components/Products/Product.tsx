@@ -28,7 +28,7 @@ export const Product = memo(function Product({
         borderColor: "var(--mui-palette-primary-main)",
         height: "180px",
         maxWidth: { xs: "380px", sm: "200px" },
-        minWidth: "170px",
+        minWidth: "180px",
         width: "100%",
       }}
     >
@@ -55,6 +55,12 @@ export const Product = memo(function Product({
               <Typography variant="subtitle2">Price: </Typography>
               <Typography color="success" variant="body1">
                 $ {product.price}
+              </Typography>
+            </Stack>
+            <Stack direction={"row"} spacing={2} alignItems={"center"}>
+              <Typography variant="subtitle2">Popular: </Typography>
+              <Typography color="success" variant="body1">
+                {`${product.popular}`}
               </Typography>
             </Stack>
           </CardContent>

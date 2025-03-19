@@ -57,6 +57,12 @@ export function SingleProduct({ product }: SingleProductProps) {
             $ {product.price}
           </Typography>
         </Stack>
+        <Stack direction={"row"} spacing={2} alignItems={"center"}>
+          <Typography variant="subtitle2">Popular: </Typography>
+          <Typography color="success" variant="body1">
+            {`${product.popular}`}
+          </Typography>
+        </Stack>
       </CardContent>
       <CardActions>
         <CartAction prodId={product.id} price={product.price} cartQnt={qnt} />

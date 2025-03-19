@@ -33,14 +33,5 @@ export const useCartStore = <T,>(selector: (store: CartStore) => T) => {
     throw new Error(`useCartStore must be used within CartStoreProvider`);
   }
 
-  //   const result = cartStoreContext(selector);
-
-  //   const [data, setData] = useState<T>({ ...result });
-
-  //   useEffect(() => {
-  //     setData(result);
-  //   }, [result]);
-
-  //   return data;
   return useStore(cartStoreContext, selector);
 };
