@@ -27,6 +27,7 @@ export function ProductsPage({
 
   const [initLoad, setInitLoad] = useState(true);
   const [products, setProducts] = useState(initProducts);
+  const [isError, setError] = useState("");
 
   const [sort, setSort] = useState<SortState>(paramsSort || initSort);
   const [filter, setFilter] = useState<FilterState>(paramsFilter || initFilter);
@@ -39,13 +40,14 @@ export function ProductsPage({
       return;
     }
     startTrans(async () => {
-      const res = (await fetchProductsCached(sort, filter)) as string;
+      const res = (await fetchProductsCached(sort, filter, 2000)) as string;
       const resData = JSON.parse(res) as FetchRes<ProductType[]>;
       startTrans(() => {
         params.set("sort", JSON.stringify(sort));
         params.set("filter", JSON.stringify(filter));
         replace(`${pathname}?${params.toString()}`);
         if (resData.success) setProducts(resData.data);
+        else setError("Some error happend");
       });
     });
   }, [sort, filter]);
@@ -73,6 +75,12 @@ export function ProductsPage({
         width={"100%"}
       >
         {isPending && <CircularProgress />}
+        {isError && (
+          <Typography color="danger" variant="h5">
+            {isError}
+          </Typography>
+        )}
+
         {products.length ? (
           <Products products={products} />
         ) : (

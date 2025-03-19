@@ -3,12 +3,13 @@
 import { Box } from "@mui/material";
 import { Product } from "./Product";
 import { useCartStore } from "@/store/CartProvider";
+import { memo } from "react";
 
 type ProductsProps = {
   products: ProductType[];
 };
 
-export function Products({ products }: ProductsProps) {
+export const Products = memo(function Products({ products }: ProductsProps) {
   const cart = useCartStore((st) => st.cart);
   return (
     <Box
@@ -29,4 +30,4 @@ export function Products({ products }: ProductsProps) {
       })}
     </Box>
   );
-}
+});

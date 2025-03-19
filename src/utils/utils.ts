@@ -1,4 +1,7 @@
-export function createRes(data: unknown, timing: number = 1000) {
+export function createRes(
+  data: unknown,
+  timing: number = 1000
+): Promise<string> {
   return new Promise((res) => {
     setTimeout(() => {
       res(JSON.stringify(data));
@@ -34,7 +37,8 @@ export function getParams(searchParams: { [key: string]: string | undefined }) {
 }
 
 export function getDataSorted(dataAr: ProductType[], sortBy: SortQuery | null) {
-  switch (sortBy?.key) {
+  if (!sortBy) return dataAr;
+  switch (sortBy.key) {
     case "byPrice":
       return dataAr.sort((a, b) => {
         if (sortBy.value === "ASC") return a.price - b.price;
@@ -45,8 +49,6 @@ export function getDataSorted(dataAr: ProductType[], sortBy: SortQuery | null) {
         if (sortBy.value === "DESC") return a.name.localeCompare(b.name);
         return b.name.localeCompare(a.name);
       });
-    case undefined:
-      return dataAr;
     default:
       return dataAr;
   }
